@@ -1,0 +1,20 @@
+---
+- name: Configurar EC2
+  hosts: all
+  become: yes
+  tasks:
+    - name: Atualizar todos os pacotes
+      yum:
+        name: "*"
+        state: latest
+
+    - name: Instalar Apache HTTPD
+      yum:
+        name: httpd
+        state: present
+
+    - name: Iniciar o serviço Apache
+      service:
+        name: httpd
+        state: started
+        enabled: yes
